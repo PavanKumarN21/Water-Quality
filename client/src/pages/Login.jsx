@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css'; // ✅ Import custom CSS
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -16,22 +17,20 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
-    
+
         try {
             const response = await axios.post(
-                'https://water-quality-backend-v5h7.onrender.com/api/auth/login', 
-                { email, password }, 
+                'https://water-quality-backend-v5h7.onrender.com/api/auth/login',
+                { email, password },
                 { withCredentials: true }
             );
-    
-            console.log("Response Data:", response.data);
-    
+
             if (response.data.success) {
                 localStorage.setItem('token', response.data.token);
                 const user = response.data.user;
-                if (!user) {
-                    throw new Error("User data is missing from the response");
-                }
+
+                if (!user) throw new Error("User data is missing from the response");
+
                 localStorage.setItem('userId', user._id);
                 localStorage.setItem('role', user.role);
                 localStorage.setItem('loggedin', JSON.stringify(true));
@@ -64,65 +63,43 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-white shadow-md rounded-lg p-6">
-                <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-                {error && <p className="text-red-500 text-center">{error}</p>}
-                <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 font-bold mb-1">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-4 relative">
-                        <label htmlFor="password" className="block text-gray-700 font-bold mb-1">
-                            Password
-                        </label>
-                        <input
-                            type={passwordVisible ? 'text' : 'password'}
-                            id="password"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <button
-                            type="button"
-                            onClick={togglePasswordVisibility}
-                            className="absolute right-2 top-10 text-gray-500 hover:text-gray-700"
-                        >
-                            {passwordVisible ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
-                        </button>
-                    </div>
-                    <div className="flex justify-between items-center mb-6">
-                        <button
-                            type="button"
-                            className="text-blue-500 text-sm hover:underline"
-                        >
-                            Forgot Password?
-                        </button>
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-                    >
-                        Submit
-                    </button>
-                </form>
-                {/* ✅ Added sign up link */}
-                <p className="mt-4 text-center text-gray-600">
-                    Don’t have an account? <Link to="/register" className="text-blue-500 hover:underline">Sign up</Link>
-                </p>
+        <div className="login-container">
+            <h2>Login</h2>
+
+            {error && <p className="error-message">{error}</p>}
+
+            <form onSubmit={handleLogin}>
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter your email"
+                />
+
+                <label htmlFor="password">Password</label>
+                <div className="password-toggle">
+                    <input
+                        type={passwordVisible ? 'text' : 'password'}
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        placeholder="Enter your password"
+                    />
+                    <span className="toggle-icon" onClick={togglePasswordVisibility}>
+                        {passwordVisible ? '🙈' : '👁️'}
+                    </span>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+
+            <div className="links">
+                <Link to="/forgot">Forgot Password?</Link><br />
+                Don’t have an account? <Link to="/register">Sign up</Link>
             </div>
         </div>
     );
