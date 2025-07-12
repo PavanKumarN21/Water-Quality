@@ -1,76 +1,74 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-   await axios.post(
-  "https://water-quality-backend-v5h7.onrender.com/api/auth/register",
-  {
-    name,
-    email,
-    password,
-  },
-  {
-    withCredentials: true,
-  }
-);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/register`,
+        {
+          name,
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
-
-      alert("Registration successful! You can now login.");
-      setName("");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.error("Signup Error:", error);
-      alert("Registration failed. Please check your details and try again.");
+      if (response.data.success) {
+        alert("Registration successful. Redirecting to login.");
+        navigate("/login");
+      } else {
+        alert(response.data.message || "Registration failed");
+      }
+    } catch (err) {
+      console.error("Signup Error:", err.response?.data || err.message);
+      alert(
+        err.response?.data?.message ||
+          "Registration failed. Please check your details and try again."
+      );
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", paddingTop: "50px" }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-4">Register</h2>
+
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          style={{ display: "block", width: "100%", margin: "10px 0", padding: "8px" }}
+          className="w-full px-4 py-2 border rounded-lg mb-4"
         />
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          style={{ display: "block", width: "100%", margin: "10px 0", padding: "8px" }}
+          className="w-full px-4 py-2 border rounded-lg mb-4"
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password (min 6 chars)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{ display: "block", width: "100%", margin: "10px 0", padding: "8px" }}
+          className="w-full px-4 py-2 border rounded-lg mb-6"
         />
         <button
           type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "#4CAF50",
-            color: "white",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700"
         >
           Register
         </button>
