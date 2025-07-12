@@ -16,7 +16,7 @@ const Forgot = () => {
         setError("");
         setMessage("");
         try {
-            const response = await axios.post("https://water-quality-backend-v5h7.onrender.com/api/auth/send-reset-otp", { email });
+            const response = await axios.post("https://water-quality-backend-n074.onrender.com/api/auth/send-reset-otp", { email });
             if (response.data.success) {
                 setMessage(response.data.message);
                 setStep(2);
@@ -30,7 +30,7 @@ const Forgot = () => {
         setError("");
         setMessage("");
         try {
-            const response = await axios.post("https://water-quality-backend-v5h7.onrender.com/api/auth/verify-reset-otp", { email });
+            const response = await axios.post("https://water-quality-backend-n074.onrender.com/api/auth/send-reset-otp", { email });
             if (response.data.success) {
                 setMessage("OTP has been resent!");
             }
@@ -50,7 +50,7 @@ const Forgot = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:4000/api/auth/verify-reset-otp", { email, resetOtp: otp, newPassword: password });
+            const response = await axios.post("https://water-quality-backend-n074.onrender.com/api/auth/verify-reset-otp", { email, resetOtp: otp, newPassword: password });
             if (response.data.success) {
                 setMessage("Password has been reset successfully! Please login with your new password.");
                 setStep(1);
