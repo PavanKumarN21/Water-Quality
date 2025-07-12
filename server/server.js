@@ -13,6 +13,8 @@ app.use(cors({
   origin: ["https://water-quality-frontend.onrender.com", "http://localhost:5173"],
   credentials: true
 }));
+console.log("CORS Origins:", ["https://water-quality-frontend.onrender.com", "http://localhost:5173"]);
+
 
 app.use("/api/auth", authRouter);
 
