@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 // Pages
 import Login from './pages/Login';
-import Signup from './pages/signup'; // ✅ Correct import, capital S
+import Signup from './pages/Signup'; // ✅ Correct import, capital S
 import Verify from './pages/Verify';
 import Forgot from './pages/Forgot';
 import Forbidden from './pages/Forbidden';
@@ -27,7 +27,7 @@ const App = () => {
       <ToastContainer/>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Signup />} /> {/* ✅ Sign Up Route */}
+        <Route path="/register" element={<Signup />} /> 
         <Route path="/verify" element={<Verify />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/forbidden" element={<Forbidden />} />

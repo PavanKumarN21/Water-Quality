@@ -10,9 +10,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ["https://water-quality-frontend.onrender.com", "http://localhost:5173"],
-  credentials: true
+  origin: ["https://water-quality-frontend.onrender.com", "http://localhost:5173"]
 }));
+
 console.log("CORS Origins:", ["https://water-quality-frontend.onrender.com", "http://localhost:5173"]);
 
 
