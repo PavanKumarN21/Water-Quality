@@ -18,17 +18,16 @@ const allowedOrigins = [
 // CORS config with dynamic origin checking
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (e.g., curl, Postman)
-    if (!origin) return callback(null, true);
-
+    if (!origin) return callback(null, true); // Allow mobile apps / Postman
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
-      return callback(new Error("Not allowed by CORS: " + origin));
+      return callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,
+  credentials: true
 }));
+
 
 console.log("✅ CORS origins allowed:", allowedOrigins);
 
