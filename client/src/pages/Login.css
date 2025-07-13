@@ -1,98 +1,49 @@
 .login-container {
   max-width: 400px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 80px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
 }
 
 .login-container h2 {
-  margin-bottom: 1.5rem;
-  color: #333333;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.login-container label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #444;
-}
-
-.login-container input[type="email"],
-.login-container input[type="password"],
-.login-container input[type="text"] {
+.login-container input {
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
+  padding: 10px;
+  margin-bottom: 12px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.login-container input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.password-toggle {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.password-toggle input {
-  flex: 1;
-}
-
-.password-toggle .toggle-icon {
-  position: absolute;
-  right: 1rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  text-align: center;
+  border-radius: 5px;
 }
 
 .login-container button {
   width: 100%;
-  padding: 0.75rem;
+  padding: 12px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
-
-.login-container button:hover {
-  background-color: #0056b3;
-}
-
-.login-container .links {
+.login-container p {
   text-align: center;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #333;
 }
 
-.login-container .links a {
+.login-container p a {
   color: #007bff;
   text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
 }
 
-.login-container .links a:hover {
+.login-container p a:hover {
   text-decoration: underline;
 }
